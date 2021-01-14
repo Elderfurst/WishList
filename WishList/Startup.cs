@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WishList.Config;
 using WishList.Data;
+using WishList.Data.Services;
+using WishList.Data.Services.Interfaces;
 
 namespace WishList
 {
@@ -30,6 +32,10 @@ namespace WishList
 
 			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
+			// Register our services
+			services.AddScoped<IWishListRecordService, WishListRecordService>();
+			services.AddScoped<IWishListEntryService, WishListEntryService>();
+			
 			services.AddControllersWithViews();
 			services.AddRazorPages();
 
