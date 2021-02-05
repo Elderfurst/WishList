@@ -47,6 +47,12 @@ namespace WishList
 					facebookOptions.AppId = authenticationSettings.Facebook.AppId;
 					facebookOptions.AppSecret = authenticationSettings.Facebook.AppSecret;
 					facebookOptions.AccessDeniedPath = "/Home/Error";
+				})
+				.AddTwitter(twitterOptions =>
+				{
+					twitterOptions.ConsumerKey = authenticationSettings.Twitter.ConsumerKey;
+					twitterOptions.ConsumerSecret = authenticationSettings.Twitter.ConsumerSecret;
+					twitterOptions.RetrieveUserDetails = true;
 				});
 
 			// Set our default policy to require authentication
