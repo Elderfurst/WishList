@@ -53,6 +53,11 @@ namespace WishList
 					twitterOptions.ConsumerKey = authenticationSettings.Twitter.ConsumerKey;
 					twitterOptions.ConsumerSecret = authenticationSettings.Twitter.ConsumerSecret;
 					twitterOptions.RetrieveUserDetails = true;
+				})
+				.AddGoogle(googleOptions =>
+				{
+					googleOptions.ClientId = authenticationSettings.Google.ClientId;
+					googleOptions.ClientSecret = authenticationSettings.Google.ClientSecret;
 				});
 
 			// Set our default policy to require authentication
