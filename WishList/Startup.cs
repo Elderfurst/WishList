@@ -27,6 +27,7 @@ namespace WishList
 		{
 			// Build settings from each configuration section and register as singletons.
 			var appSettings = Configuration.GetSection("Config").Get<AppSettings>();
+			var authenticationSettings = Configuration.GetSection("Authentication").Get<AuthenticationSettings>();
 
 			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(appSettings.DatabaseConnectionString));
 
@@ -38,6 +39,15 @@ namespace WishList
 			
 			services.AddControllersWithViews();
 			services.AddRazorPages();
+
+			// Add our authentication providers
+			services.AddAuthentication()
+				.AddFacebook(facebookOptions =>
+				{
+					facebookOptions.AppId = authenticationSettings.Facebook.AppId;
+					facebookOptions.AppSecret = authenticationSettings.Facebook.AppSecret;
+					facebookOptions.AccessDeniedPath = "/Home/Error";
+				});
 
 			// Set our default policy to require authentication
 			services.AddAuthorization(options =>

@@ -15,6 +15,8 @@ namespace WishList.Data
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			base.OnModelCreating(modelBuilder);
+
 			modelBuilder.Entity<WishListRecord>()
 				.Property(w => w.ReferenceId)
 				.HasDefaultValueSql("newid()");
